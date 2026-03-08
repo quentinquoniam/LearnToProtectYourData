@@ -30,7 +30,7 @@ Le projet suit l'architecture standard des extensions Chrome Manifest V3 :
 - `hagezi_mini.json` : La liste JSON contenant les signatures de domaines des trackers à surveiller.
 - `icons/` : Les ressources graphiques nécessaires à l'extension.
 
-## ⚙️ Fonctionnement Interne
+## ⚙️ Fonctionnement
 
 1. Au démarrage, `background.js` pré-charge la blocklist locale en mémoire `Set()`.
 2. Lorsqu'un site web est chargé, l'API `chrome.webRequest` écoute les requêtes sortantes avant qu'elles ne soient envoyées.
