@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Learn to Protect Your Data</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>Learn to Protect Your Data</h1>
+        <p class="subtitle">Dashboard</p>
+    </div>
+
+    <div class="card">
+        <h2>Onglet Actif: <span id="tab-domain" class="domain-title">...</span></h2>
+        <div class="stat-container">
+            <div class="stat-box" style="flex: unset; width: 100%;">
+                <span class="stat-value text-orange" id="tab-tracker-count">...</span>
+                <span class="stat-label">Trackers détectés (Onglet)</span>
+            </div>
+        </div>
+        <h3 class="subsection-title">Trackers bloqués/détectés sur cette page</h3>
+        <ul id="tab-domains-list" class="domain-list">
+            <!-- Rempli par le script -->
+            <li class="empty-state">Chargement...</li>
+        </ul>
+    </div>
+
+    <div class="card highlight">
+        <h2>Session Globale</h2>
+        <div class="stat-container">
+            <div class="stat-box">
+                <span class="stat-value text-orange" id="cookie-third-count">...</span>
+                <span class="stat-label">Total Cookies Tiers</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value text-red" id="global-tracker-count">...</span>
+                <span class="stat-label">Total Trackers Interceptés</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>

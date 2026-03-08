@@ -1,0 +1,148 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 320px;
+    margin: 0;
+    padding: 16px;
+    background-color: #f7f9fc;
+    color: #333;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #1a73e8;
+}
+
+.subtitle {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 4px 0 0 0;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.card.highlight {
+    border-left: 4px solid #ea4335;
+}
+
+h2 {
+    font-size: 1rem;
+    margin: 0 0 12px 0;
+    color: #444;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.subsection-title {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 16px 0 8px 0;
+    border-bottom: 1px solid #f1f3f4;
+    padding-bottom: 4px;
+}
+
+.stat-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.stat-box {
+    flex: 1;
+    text-align: center;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #202124;
+}
+
+.text-red {
+    color: #ea4335;
+}
+
+.text-blue {
+    color: #1a73e8;
+}
+
+.text-orange {
+    color: #f29900;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #5f6368;
+    margin-top: 4px;
+}
+
+.domain-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.domain-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #f1f3f4;
+    font-size: 0.85rem;
+}
+
+.domain-item:last-child {
+    border-bottom: none;
+}
+
+.domain-name {
+    color: #3c4043;
+    word-break: break-all;
+}
+
+.domain-item.other .domain-name {
+    font-style: italic;
+    color: #777;
+}
+
+.domain-item.other .domain-count {
+    background: #f1f3f4;
+    color: #555;
+}
+
+.domain-count {
+    font-weight: bold;
+    color: #ea4335;
+    background: #fce8e6;
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    height: fit-content;
+}
+
+.domain-title {
+    font-weight: normal;
+    color: #1a73e8;
+}
+
+.empty-state {
+    text-align: center;
+    color: #999;
+    font-size: 0.85rem;
+    padding: 12px 0;
+}
