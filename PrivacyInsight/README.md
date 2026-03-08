@@ -15,7 +15,7 @@ Ce projet correspond à l'achèvement du MVP (Minimum Viable Product).
   - **Statistiques de la session entière** : Affiche le nombre total de cookies tiers ainsi que le total global des trackers interceptés par l'extension depuis le démarrage du navigateur.
 - **Moteur "Mini" Intégré** : L'extension utilise une liste de domaines de blocage optimisée (basée sur HaGeZi Mini) pour identifier efficacement les pisteurs.
 
-## 🛠 Architecture du Projet
+## 🛠 Architecture Projet
 
 Le projet suit l'architecture standard des extensions Chrome Manifest V3 :
 
