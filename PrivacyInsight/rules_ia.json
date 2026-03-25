@@ -1,18 +1,18 @@
 [
   {
-    "regex": "(^|\\.)(chatgpt|openai|claude|anthropic|gemini|deepseek|mistral|perplexity|huggingface|character|poe|cohere|notebooklm|phind|chatpdf|humata|consensus|elicit|scispace|komo|klingai|you|perplexity|perplexity-ai)\\.(com|ai|io|net|org)$",
+    "regex": "(chatgpt|openai|claude|anthropic|gemini|deepseek|mistral|perplexity|huggingface|character|poe|cohere|notebooklm|phind|chatpdf|humata|consensus|elicit|scispace|komo|klingai|you|perplexity|perplexity-ai)",
     "name": "Assistants IA Généralistes",
     "category": "Intelligence Artificielle",
     "risk": "Pensez à ne pas partager de données personnelles ou de secrets industriels dans vos prompts."
   },
   {
-    "regex": "(^|\\.)(midjourney|leonardo|firefly|adobe|runway|heygen|elevenlabs|suno|udio|pika|luma|lumalabs|ideogram|synthesia|murf|canva|framer|websim|kling|dalle)\\.(com|ai|io|art|net|app|org)$",
+    "regex": "(midjourney|leonardo|firefly|adobe|runway|heygen|elevenlabs|suno|udio|pika|luma|lumalabs|ideogram|synthesia|murf|canva|framer|websim|kling|dalle)",
     "name": "Outils de Génération Multimédia",
     "category": "IA Créative (Image/Vidéo/Audio)",
     "risk": "Attention au droit à l'image des personnes réelles et aux deepfakes involontaires."
   },
   {
-    "regex": "(^|\\.)(notion|grammarly|jasper|copy|writesonic|quillbot|gamma|tome|replit|bolt|v0|lovable|stackblitz|glitch|codeium|airtable|clickup|monday|asana|trello)\\.(com|so|ai|io|app|dev|net)$",
+    "regex": "(notion|grammarly|jasper|copy|writesonic|quillbot|gamma|tome|replit|bolt|v0|lovable|stackblitz|glitch|codeium|airtable|clickup|monday|asana|trello)",
     "name": "Outils de Productivité Web",
     "category": "Bureautique & Développement Assisté",
     "risk": "Ne partagez pas de code propriétaire, de clés API ou de brouillons stratégiques confidentiels."

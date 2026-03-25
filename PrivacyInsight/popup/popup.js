@@ -5,6 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabDomainEl = document.getElementById('tab-domain');
     const tabTrackerCountEl = document.getElementById('tab-tracker-count');
     const tabDomainsListEl = document.getElementById('tab-domains-list');
+    const toggleTrackersBtn = document.getElementById('toggle-trackers-btn');
+
+    if (toggleTrackersBtn && tabDomainsListEl) {
+        toggleTrackersBtn.addEventListener('click', () => {
+            tabDomainsListEl.classList.toggle('hidden');
+            if (tabDomainsListEl.classList.contains('hidden')) {
+                toggleTrackersBtn.textContent = 'Voir plus';
+            } else {
+                toggleTrackersBtn.textContent = 'Voir moins';
+            }
+        });
+    }
 
     // Nouveaux éléments Score
     const privacyScoreContainerEl = document.getElementById('privacy-score-container');
@@ -33,16 +45,40 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Audit Cookies et Tracker pour l'onglet actif
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         const activeTab = tabs[0];
+        const httpsCheckIconEl = document.getElementById('https-check-icon');
+        const httpsCheckTextEl = document.getElementById('https-check-text');
+
         if (!activeTab || !activeTab.url.startsWith('http')) {
             tabDomainEl.textContent = 'Non applicable';
             tabTrackerCountEl.textContent = '0';
             if (tabCookieCountEl) tabCookieCountEl.textContent = '0';
             if (privacyScoreLetterEl) privacyScoreLetterEl.textContent = '?';
             if (privacyScoreTextEl) privacyScoreTextEl.textContent = 'Non applicable';
+            
+            if (httpsCheckIconEl) httpsCheckIconEl.textContent = '➖';
+            if (httpsCheckTextEl) {
+                httpsCheckTextEl.textContent = 'Non applicable';
+                httpsCheckTextEl.className = 'text-sm text-gray';
+            }
             return;
         }
 
         const url = new URL(activeTab.url);
+        
+        // --- Vérification HTTPS ---
+        if (url.protocol === 'https:') {
+            if (httpsCheckIconEl) httpsCheckIconEl.textContent = '🔒';
+            if (httpsCheckTextEl) {
+                httpsCheckTextEl.textContent = 'Connexion chiffrée par certificat SSL.';
+                httpsCheckTextEl.className = 'text-sm text-green';
+            }
+        } else {
+            if (httpsCheckIconEl) httpsCheckIconEl.textContent = '🔓';
+            if (httpsCheckTextEl) {
+                httpsCheckTextEl.textContent = 'Connexion HTTP non sécurisée. Prudence !';
+                httpsCheckTextEl.className = 'text-sm text-red';
+            }
+        }
         tabDomainEl.textContent = getHostname(activeTab.url);
 
         const mainDomainParts = url.hostname.split('.');

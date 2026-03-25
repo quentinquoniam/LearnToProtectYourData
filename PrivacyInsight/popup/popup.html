@@ -8,6 +8,13 @@
 </head>
 
 <body>
+    <div class="browser-topbar">
+        <div class="active-tab-shape">
+            <span class="tab-favicon">🌐</span>
+            <span id="tab-domain" class="domain-title tab-domain-text">...</span>
+        </div>
+    </div>
+
     <div class="header">
         <h1>Learn to Protect Your Data</h1>
         <p class="subtitle">Dashboard</p>
@@ -26,9 +33,19 @@
         </div>
     </div>
 
-    <div class="card">
-        <h2>Onglet Actif: <span id="tab-domain" class="domain-title">...</span></h2>
+    <!-- Carte Bases de Cyber Sécurité -->
+    <div class="card cybersecurity-card">
+        <h2>Bases de cyber sécurité</h2>
+        <div class="cyber-check-item" id="https-check-item">
+            <span class="cyber-check-icon" id="https-check-icon">⏳</span>
+            <div class="cyber-check-content">
+                <strong>Connexion sécurisée (HTTPS)</strong>
+                <p id="https-check-text" class="text-sm">Vérification en cours...</p>
+            </div>
+        </div>
+    </div>
 
+    <div class="card">
         <!-- Nouveau composant Score -->
         <div class="score-container" id="privacy-score-container">
             <div class="score-circle" id="privacy-score-letter">?</div>
@@ -46,8 +63,11 @@
             </div>
         </div>
 
-        <h3 class="subsection-title">Trackers détectés sur cette page</h3>
-        <ul id="tab-domains-list" class="domain-list">
+        <div class="subsection-header">
+            <h3 class="subsection-title">Trackers détectés sur cette page</h3>
+            <button id="toggle-trackers-btn" class="toggle-btn">Voir plus</button>
+        </div>
+        <ul id="tab-domains-list" class="domain-list hidden">
             <!-- Rempli par le script -->
             <li class="empty-state">Chargement...</li>
         </ul>

@@ -1,20 +1,56 @@
 [
   {
-    "regex": "(^|\\.)(binance|coinbase|kraken|okx|bybit|kucoin|gate|huobi|mexc|bitpanda|crypto|etoro|blackrock|fidelity|vanguard|robinhood|trade-republic|gemini|bitstamp|ftx|kucoin)\\.(com|io|net|org|app|ai|me|eu|co)$",
-    "name": "Plateforme d'Exchange Crypto",
-    "category": "Bourses & Trading",
-    "risk": "Cible majeure de vol d'actifs et de phishing. Activez toujours l'A2F et ne cliquez jamais sur des liens suspects dans vos emails."
+    "name": "Ecosystème de Trading (CEX & Data)",
+    "regex": "(binance|coinbase|kraken|okx|bybit|kucoin|gate\\.io|huobi|mexc|bitpanda|bitget|phemex|deribit|bitfinex|lbank|bitstamp|whitebit|coingecko|coinmarketcap|tradingview|dexscreener|dextools)",
+    "category": "Trading & Analyse",
+    "risk": "Attention au typosquatting. Vérifiez que le certificat SSL correspond à l'entité officielle."
   },
   {
-    "regex": "(^|\\.)(metamask|ledger|phantom|uniswap|pancakeswap|etherscan|solscan|tallyho|zerion|zapper|rabby|trustwallet|blockchain|rainbow|dydx|opensea|blur|magicamp|lido|aave|curve|makerdao)\\.(io|com|net|org|app|sh|fi)$",
-    "name": "Wallet De-Fi & Infrastructures Web3",
-    "category": "Infrastructure Decentralisée",
-    "risk": "Alerte de sécurité critique (Phishing / Scams) ! Vérifiez scrupuleusement l'URL avant de signer toute transaction avec votre portefeuille numérique."
+    "name": "Protocoles DeFi & DEX Multi-Chain",
+    "regex": "(uniswap|pancakeswap|sushiswap|jupiter|raydium|aerodrome|curve|aave|lido|compound|synthetix|gmx|dydx|1inch|cowswap|thorchain|stargate|layerzero|orbiter|zksync|starknet|base\\.org|arbitrum|optimism|polygon)",
+    "category": "DeFi & Bridges",
+    "risk": "Risque de détournement de smart-contract. Ne validez jamais une transaction 'Approve' illimitée sur un site inconnu."
   },
   {
-    "regex": "\\.crypto$",
-    "name": "Domaine Décentralisé Web3",
-    "category": "Web3 & Blockchain",
-    "risk": "Ces domaines décentralisés sont parfois exploités pour héberger des arnaques non modérées. Soyez d'une extrême prudence."
+    "name": "NFT & Marketplaces",
+    "regex": "(opensea|blur|magiceden|rarible|looksrare|x2y2|superrare|foundation|niftygateway|artblocks|pudgypenguins|boredape|bayc|cryptopunks)",
+    "category": "NFT & Collectibles",
+    "risk": "Cible fréquente de 'Fake Mint' (faux lancements). Vérifiez l'adresse du contrat sur un explorateur de blocs."
+  },
+  {
+    "name": "Custody & Hardware Wallets",
+    "regex": "(metamask|ledger|phantom|trezor|keplr|argent|trustwallet|exodus|rabby|zerion|zapper|tallyho|rainbow|safepal|bitbox|coolwallet|fireblocks)",
+    "category": "Wallets & Sécurité",
+    "risk": "CRITIQUE : Ne saisissez JAMAIS votre phrase de récupération (seed phrase) sur un site web. Un site légitime ne la demandera jamais."
+  },
+  {
+    "name": "Indicateurs de Phishing & Drainers",
+    "regex": "(claim-airdrop|connect-wallet|verify-holder|security-update|revoke-permissions|seed-recovery|mnemonic-check|bonus-crypto|giveaway-binance|staking-rewards-high)",
+    "category": "Comportement Suspect",
+    "risk": "PATTERN DE SCAM DÉTECTÉ. Ce site présente des caractéristiques typiques de vol de fonds par ingénierie sociale."
+  },
+  {
+    "name": "Web3 TLDs & Domains",
+    "regex": "\\.(eth|sol|crypto|nft|wallet|x|zil|bitcoin|polygon|goerli|sepolia|network|finance|exchange|money|claims|foundation)$",
+    "category": "Domaines Web3",
+    "risk": "Domaines non régulés. Utilisés pour le Web3 mais aussi très prisés par les attaquants pour leur anonymat."
+  },
+  {
+    "name": "Détection Punycode (Homoglyphes)",
+    "regex": "xn--[a-z0-9\\-]{4,}\\.(com|io|net|org|app|fi|xyz|sh|biz)",
+    "category": "Anti-Phishing IDN",
+    "risk": "CRITIQUE. Ce domaine utilise des caractères spéciaux pour imiter une marque légitime. Risque de vol d'identifiants ou de seed phrase."
+  },
+  {
+    "name": "Homoglyphe Crypto Mixte",
+    "regex": "xn--.*(binance|metamask|ledger|coinbase|trezor|phantom|uniswap|aave|lido)",
+    "category": "Typosquatting Avancé",
+    "risk": "Tentative d'usurpation d'identité crypto via Punycode. Ne jamais interagir avec ce site."
+  },
+  {
+    "name": "Faux Sous-domaines de Sécurité",
+    "regex": "(wallet|security|login|verify|update|claim|fix|support|sync)-[a-z0-9]+\\.(com|io|net|org)",
+    "category": "Social Engineering",
+    "risk": "L'utilisation d'un tiret avec un mot-clé de sécurité est un indicateur fort de phishing (ex: metamask-security.com)."
   }
 ]

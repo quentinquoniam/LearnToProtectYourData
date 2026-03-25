@@ -1,14 +1,32 @@
 [
   {
-    "regex": "(^|\\.)(boursorama|bnpparibas|societegenerale|credit-agricole|labanquepostale|lcl|cic|banquepopulaire|fortuneo|boursedirect|revolut|paypal|wise|n26|stripe|qonto|hsbc|chase|santander|barclays|wellsfargo|citibank|monzo|bunq|shine|hellobank|monabanq|bforbank|lydia|sumup|klarna|affirm)\\.(com|fr|net|me|it|es|de|co\\.uk|eu|io)$",
-    "name": "Banque & Services Financiers",
-    "category": "Banques & Finance",
-    "risk": "Ce site gère des données financières critiques. Vérifiez toujours que le cadenas de sécurité est présent et méfiez-vous des extensions suspectes."
+    "name": "Banques de Détail (Retail FR & EU)",
+    "regex": "(boursorama|boursobank|bnpparibas|bnpp|societegenerale|socgen|credit-agricole|ca-enligne|labanquepostale|lcl|cic|banquepopulaire|credit-mutuel|fortuneo|hellobank|monabanq|bforbank|caisse-epargne|nagelmackers|ing|dkb|commerzbank)",
+    "category": "Banques Traditionnelles",
+    "risk": "Attention au typosquatting complexe (ex: bours0-securite.com). Les banques françaises n'utilisent presque jamais le .com pour leurs clients particuliers."
   },
   {
-    "regex": "(^|\\.)(impots|ameli|caf|pole-emploi|francetravail|service-public)\\.(gouv\\.fr|fr)$",
-    "name": "Services Publics & Étatiques",
-    "category": "Services Gouvernementaux",
-    "risk": "Ces plateformes traitent de l'identité numérique et d'informations fiscales. Assurez-vous d'être sur le site officiel de l'État."
+    "name": "Fintech, Néo-banques & Paiements",
+    "regex": "(revolut|n26|qonto|wise|lydia|sumeria|nickel|bunq|shine|vivid|klarna|affirm|stripe|paypal|adyen|sumup|payfit|ponto|swan|mooncard)",
+    "category": "Fintech & Paiement",
+    "risk": "Les néo-banques sont souvent la cible de 'Smishing' (Phishing par SMS) avec des liens raccourcis pointant vers des domaines en .me ou .io."
+  },
+  {
+    "name": "Souveraineté & Identité Numérique (France)",
+    "regex": "(impots|ameli|caf|pole-emploi|francetravail|service-public|ants|antai|france-connect|france-identite|identite-numerique|dossier-facile|maprimerenov|moncompteformation|pass-culture|mon-accompagnateur-renov)",
+    "category": "Services Régaliens",
+    "risk": "CRITIQUE : Toute URL ne finissant pas par .gouv.fr ou .fr pour ces services est une tentative de fraude avérée."
+  },
+  {
+    "name": "Patterns de Phishing 'Path-Based' (Transverse)",
+    "regex": "/(connexion|login|secure|securite|mon-espace|client|verification|3ds|3d-secure|valider-compte|remboursement|amende|vignette|critair|regularisation|mise-a-jour)/(binance|revolut|ameli|impots|boursorama|paypal)",
+    "category": "Détection Comportementale",
+    "risk": "Ce pattern détecte le phishing hébergé sur des domaines légitimes compromis (ex: site-legit.com/ameli/login)."
+  },
+  {
+    "name": "Infrastructure de Fraude (Punycode & Subdomains)",
+    "regex": "(xn--|bit\\.ly|t\\.co|tinyurl\\.com|rebrand\\.ly|is\\.gd|cutt\\.ly|clck\\.ru|shorte\\.st).*(ameli|impots|banque|wallet|crypto|revolut)",
+    "category": "Obscurcissement",
+    "risk": "Utilisation de raccourcisseurs d'URL ou de caractères homoglyphes pour masquer la destination réelle vers un site bancaire."
   }
 ]
