@@ -146,3 +146,129 @@ h2 {
     font-size: 0.85rem;
     padding: 12px 0;
 }
+
+/* Nouvelles classes pour le Score de Confidentialité */
+.score-container {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 16px;
+    gap: 16px;
+}
+
+.score-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    background: #ccc;
+    flex-shrink: 0;
+}
+
+.score-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #444;
+}
+
+/* Couleurs de note */
+.score-container.score-A .score-circle { background-color: #27ae60; }
+.score-container.score-A { border-left: 4px solid #27ae60; }
+
+.score-container.score-B .score-circle { background-color: #f1c40f; }
+.score-container.score-B { border-left: 4px solid #f1c40f; }
+
+.score-container.score-C .score-circle { background-color: #e67e22; }
+.score-container.score-C { border-left: 4px solid #e67e22; }
+
+.score-container.score-D .score-circle { background-color: #e74c3c; }
+.score-container.score-D { border-left: 4px solid #e74c3c; }
+
+.hidden {
+    display: none !important;
+}
+
+/* --- Generic Security Card Styles --- */
+.security-card {
+    background-color: #f8f9fa;
+    border-left: 4px solid #ccc;
+}
+
+.security-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.security-icon {
+    font-size: 1.2rem;
+}
+
+.security-title {
+    margin: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+    font-size: 0.95rem; /* Correspond environ à 1rem original */
+}
+
+.security-category {
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin: 0 0 12px 0;
+}
+
+.security-risk-box {
+    background: white;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.security-risk-box strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.security-risk-box p {
+    margin: 0;
+}
+
+/* Theme: IA */
+.card-theme-ia {
+    border-left-color: #8e44ad;
+    background-color: #f5eef8;
+}
+.card-theme-ia .security-title { color: #6c3483; }
+.card-theme-ia .security-category { color: #8e44ad; }
+.card-theme-ia .security-risk-box { border-color: #d7bde2; }
+.card-theme-ia .security-risk-box strong { color: #6c3483; }
+
+/* Theme: Banque */
+.card-theme-banque {
+    border-left-color: #3498db;
+    background-color: #ebf5fb;
+}
+.card-theme-banque .security-title { color: #21618c; }
+.card-theme-banque .security-category { color: #3498db; }
+.card-theme-banque .security-risk-box { border-color: #aed6f1; }
+.card-theme-banque .security-risk-box strong { color: #21618c; }
+
+/* Theme: Crypto */
+.card-theme-crypto {
+    border-left-color: #f39c12;
+    background-color: #fef5e7;
+}
+.card-theme-crypto .security-title { color: #a04000; }
+.card-theme-crypto .security-category { color: #f39c12; }
+.card-theme-crypto .security-risk-box { border-color: #f8c471; }
+.card-theme-crypto .security-risk-box strong { color: #a04000; }

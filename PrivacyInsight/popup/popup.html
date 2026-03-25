@@ -13,33 +13,44 @@
         <p class="subtitle">Dashboard</p>
     </div>
 
+    <!-- Carte Sécurité Dynamique (IA/Banque/Crypto) -->
+    <div id="security-card" class="card security-card hidden">
+        <div class="security-card-header">
+            <span class="security-icon" id="security-icon">💡</span>
+            <h2 class="security-title" id="security-title">Conseil IA : <span id="security-name"></span></h2>
+        </div>
+        <p class="security-category" id="security-category"></p>
+        <div class="security-risk-box">
+            <strong id="security-risk-label">Point de vigilance :</strong>
+            <p id="security-risk-text"></p>
+        </div>
+    </div>
+
     <div class="card">
         <h2>Onglet Actif: <span id="tab-domain" class="domain-title">...</span></h2>
-        <div class="stat-container">
-            <div class="stat-box" style="flex: unset; width: 100%;">
+
+        <!-- Nouveau composant Score -->
+        <div class="score-container" id="privacy-score-container">
+            <div class="score-circle" id="privacy-score-letter">?</div>
+            <div class="score-text" id="privacy-score-text">Analyse en cours...</div>
+        </div>
+
+        <div class="stat-container" style="margin-bottom: 16px;">
+            <div class="stat-box">
                 <span class="stat-value text-orange" id="tab-tracker-count">...</span>
-                <span class="stat-label">Trackers détectés (Onglet)</span>
+                <span class="stat-label">Trackers détectés</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value text-orange" id="tab-cookie-count">...</span>
+                <span class="stat-label">Cookies tiers</span>
             </div>
         </div>
-        <h3 class="subsection-title">Trackers bloqués/détectés sur cette page</h3>
+
+        <h3 class="subsection-title">Trackers détectés sur cette page</h3>
         <ul id="tab-domains-list" class="domain-list">
             <!-- Rempli par le script -->
             <li class="empty-state">Chargement...</li>
         </ul>
-    </div>
-
-    <div class="card highlight">
-        <h2>Session Globale</h2>
-        <div class="stat-container">
-            <div class="stat-box">
-                <span class="stat-value text-orange" id="cookie-third-count">...</span>
-                <span class="stat-label">Total Cookies Tiers</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-value text-red" id="global-tracker-count">...</span>
-                <span class="stat-label">Total Trackers Interceptés</span>
-            </div>
-        </div>
     </div>
 
     <script src="popup.js"></script>

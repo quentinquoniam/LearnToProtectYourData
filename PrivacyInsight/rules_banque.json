@@ -1,0 +1,14 @@
+[
+  {
+    "regex": "(^|\\.)(boursorama|bnpparibas|societegenerale|credit-agricole|labanquepostale|lcl|cic|banquepopulaire|fortuneo|boursedirect|revolut|paypal|wise|n26|stripe|qonto|hsbc|chase|santander|barclays|wellsfargo|citibank|monzo|bunq|shine|hellobank|monabanq|bforbank|lydia|sumup|klarna|affirm)\\.(com|fr|net|me|it|es|de|co\\.uk|eu|io)$",
+    "name": "Banque & Services Financiers",
+    "category": "Banques & Finance",
+    "risk": "Ce site gère des données financières critiques. Vérifiez toujours que le cadenas de sécurité est présent et méfiez-vous des extensions suspectes."
+  },
+  {
+    "regex": "(^|\\.)(impots|ameli|caf|pole-emploi|francetravail|service-public)\\.(gouv\\.fr|fr)$",
+    "name": "Services Publics & Étatiques",
+    "category": "Services Gouvernementaux",
+    "risk": "Ces plateformes traitent de l'identité numérique et d'informations fiscales. Assurez-vous d'être sur le site officiel de l'État."
+  }
+]

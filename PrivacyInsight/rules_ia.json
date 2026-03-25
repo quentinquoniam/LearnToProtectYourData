@@ -1,0 +1,26 @@
+[
+  {
+    "regex": "(^|\\.)(chatgpt|openai|claude|anthropic|gemini|deepseek|mistral|perplexity|huggingface|character|poe|cohere|notebooklm|phind|chatpdf|humata|consensus|elicit|scispace|komo|klingai|you|perplexity|perplexity-ai)\\.(com|ai|io|net|org)$",
+    "name": "Assistants IA Généralistes",
+    "category": "Intelligence Artificielle",
+    "risk": "Pensez à ne pas partager de données personnelles ou de secrets industriels dans vos prompts."
+  },
+  {
+    "regex": "(^|\\.)(midjourney|leonardo|firefly|adobe|runway|heygen|elevenlabs|suno|udio|pika|luma|lumalabs|ideogram|synthesia|murf|canva|framer|websim|kling|dalle)\\.(com|ai|io|art|net|app|org)$",
+    "name": "Outils de Génération Multimédia",
+    "category": "IA Créative (Image/Vidéo/Audio)",
+    "risk": "Attention au droit à l'image des personnes réelles et aux deepfakes involontaires."
+  },
+  {
+    "regex": "(^|\\.)(notion|grammarly|jasper|copy|writesonic|quillbot|gamma|tome|replit|bolt|v0|lovable|stackblitz|glitch|codeium|airtable|clickup|monday|asana|trello)\\.(com|so|ai|io|app|dev|net)$",
+    "name": "Outils de Productivité Web",
+    "category": "Bureautique & Développement Assisté",
+    "risk": "Ne partagez pas de code propriétaire, de clés API ou de brouillons stratégiques confidentiels."
+  },
+  {
+    "regex": "\\.ai$",
+    "name": "Domaine IA Non Spécifique",
+    "category": "Service Web IA",
+    "risk": "Les noms de domaine en .ai sont souvent liés à l'IA. Vérifiez soigneusement leurs politiques de confidentialité."
+  }
+]

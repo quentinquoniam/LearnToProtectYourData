@@ -1,0 +1,20 @@
+[
+  {
+    "regex": "(^|\\.)(binance|coinbase|kraken|okx|bybit|kucoin|gate|huobi|mexc|bitpanda|crypto|etoro|blackrock|fidelity|vanguard|robinhood|trade-republic|gemini|bitstamp|ftx|kucoin)\\.(com|io|net|org|app|ai|me|eu|co)$",
+    "name": "Plateforme d'Exchange Crypto",
+    "category": "Bourses & Trading",
+    "risk": "Cible majeure de vol d'actifs et de phishing. Activez toujours l'A2F et ne cliquez jamais sur des liens suspects dans vos emails."
+  },
+  {
+    "regex": "(^|\\.)(metamask|ledger|phantom|uniswap|pancakeswap|etherscan|solscan|tallyho|zerion|zapper|rabby|trustwallet|blockchain|rainbow|dydx|opensea|blur|magicamp|lido|aave|curve|makerdao)\\.(io|com|net|org|app|sh|fi)$",
+    "name": "Wallet De-Fi & Infrastructures Web3",
+    "category": "Infrastructure Decentralisée",
+    "risk": "Alerte de sécurité critique (Phishing / Scams) ! Vérifiez scrupuleusement l'URL avant de signer toute transaction avec votre portefeuille numérique."
+  },
+  {
+    "regex": "\\.crypto$",
+    "name": "Domaine Décentralisé Web3",
+    "category": "Web3 & Blockchain",
+    "risk": "Ces domaines décentralisés sont parfois exploités pour héberger des arnaques non modérées. Soyez d'une extrême prudence."
+  }
+]
