@@ -1,0 +1,156 @@
+/* Base Notification Style */
+#privacy-insight-alerter {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 360px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0,0,0,0.05);
+    z-index: 2147483647; /* Maximum z-index to stay on top of everything */
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    animation: pi-slide-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    display: flex;
+    flex-direction: column;
+}
+
+#privacy-insight-alerter .pi-alerter-content {
+    display: flex;
+    padding: 16px;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+#privacy-insight-alerter .pi-alerter-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+#privacy-insight-alerter .pi-alerter-text {
+    flex: 1;
+    color: #333333;
+}
+
+#privacy-insight-alerter .pi-alerter-text strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: #111111;
+}
+
+#privacy-insight-alerter .pi-alerter-text p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #444444;
+}
+
+#privacy-insight-alerter .pi-alerter-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #999999;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+    margin-top: -4px;
+    transition: color 0.2s;
+}
+
+#privacy-insight-alerter .pi-alerter-close:hover {
+    color: #333333;
+}
+
+.pi-alerter-progress {
+    height: 4px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.1);
+    transform-origin: left;
+    animation: pi-shrink 8s linear forwards;
+}
+
+/* --- Risk Levels --- */
+
+/* High Risk (Orange) */
+#privacy-insight-alerter.pi-high {
+    border-left: 6px solid #FF9800;
+}
+#privacy-insight-alerter.pi-high .pi-alerter-text strong {
+    color: #E65100;
+}
+#privacy-insight-alerter.pi-high .pi-alerter-progress {
+    background-color: #FF9800;
+}
+
+/* Info Risk (Blue) */
+#privacy-insight-alerter.pi-info {
+    border-left: 6px solid #2196F3;
+}
+#privacy-insight-alerter.pi-info .pi-alerter-text strong {
+    color: #0D47A1;
+}
+#privacy-insight-alerter.pi-info .pi-alerter-progress {
+    background-color: #2196F3;
+}
+
+/* Sensible Risk (Purple) */
+#privacy-insight-alerter.pi-sensible {
+    border-left: 6px solid #9C27B0;
+}
+#privacy-insight-alerter.pi-sensible .pi-alerter-text strong {
+    color: #4A148C;
+}
+#privacy-insight-alerter.pi-sensible .pi-alerter-progress {
+    background-color: #9C27B0;
+}
+
+/* Critical Risk (Red/Pulsing) - "vraiment visible" */
+#privacy-insight-alerter.pi-critical {
+    border-left: 6px solid #D32F2F;
+    box-shadow: 0 10px 40px rgba(211, 47, 47, 0.3), 0 0 0 2px rgba(211, 47, 47, 0.2);
+    /* Pulse animation for extra visibility on critical alerts */
+    animation: pi-slide-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, pi-pulse-border 2s infinite ease-in-out;
+}
+
+#privacy-insight-alerter.pi-critical .pi-alerter-text strong {
+    color: #B71C1C;
+}
+
+#privacy-insight-alerter.pi-critical .pi-alerter-progress {
+    background-color: #D32F2F;
+}
+
+/* Animations */
+@keyframes pi-slide-in {
+    from {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pi-slide-out {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+}
+
+@keyframes pi-pulse-border {
+    0% { box-shadow: 0 10px 40px rgba(211, 47, 47, 0.3), 0 0 0 2px rgba(211, 47, 47, 0.2); }
+    50% { box-shadow: 0 10px 40px rgba(211, 47, 47, 0.5), 0 0 0 4px rgba(211, 47, 47, 0.4); }
+    100% { box-shadow: 0 10px 40px rgba(211, 47, 47, 0.3), 0 0 0 2px rgba(211, 47, 47, 0.2); }
+}
+
+@keyframes pi-shrink {
+    from { transform: scaleX(1); }
+    to { transform: scaleX(0); }
+}

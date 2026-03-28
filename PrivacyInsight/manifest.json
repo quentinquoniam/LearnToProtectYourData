@@ -12,6 +12,20 @@
     "host_permissions": [
         "<all_urls>"
     ],
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "scripts/bip39.js",
+                "scripts/content.js"
+            ],
+            "css": [
+                "scripts/content.css"
+            ]
+        }
+    ],
     "background": {
         "service_worker": "background.js",
         "type": "module"

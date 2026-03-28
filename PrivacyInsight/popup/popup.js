@@ -1,38 +1,59 @@
 // popup.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Elements
+    // ---- Theme Logic ----
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const rootHtml = document.documentElement;
+    
+    // Load theme from localStorage
+    const savedTheme = localStorage.getItem('privacyInsightTheme') || 'dark';
+    rootHtml.setAttribute('data-theme', savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = rootHtml.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        rootHtml.setAttribute('data-theme', newTheme);
+        localStorage.setItem('privacyInsightTheme', newTheme);
+    });
+
+    // ---- UI Elements ----
     const tabDomainEl = document.getElementById('tab-domain');
+    const httpsCheckIconEl = document.getElementById('https-check-icon');
+    const httpsCheckStrongEl = document.getElementById('https-check-strong');
+    const httpsCheckTextEl = document.getElementById('https-check-text');
+    const httpsIndicatorEl = document.getElementById('https-indicator');
+
     const tabTrackerCountEl = document.getElementById('tab-tracker-count');
-    const tabDomainsListEl = document.getElementById('tab-domains-list');
-    const toggleTrackersBtn = document.getElementById('toggle-trackers-btn');
-
-    if (toggleTrackersBtn && tabDomainsListEl) {
-        toggleTrackersBtn.addEventListener('click', () => {
-            tabDomainsListEl.classList.toggle('hidden');
-            if (tabDomainsListEl.classList.contains('hidden')) {
-                toggleTrackersBtn.textContent = 'Voir plus';
-            } else {
-                toggleTrackersBtn.textContent = 'Voir moins';
-            }
-        });
-    }
-
-    // Nouveaux éléments Score
-    const privacyScoreContainerEl = document.getElementById('privacy-score-container');
+    const tabCookieCountEl = document.getElementById('tab-cookie-count');
     const privacyScoreLetterEl = document.getElementById('privacy-score-letter');
     const privacyScoreTextEl = document.getElementById('privacy-score-text');
-    const tabCookieCountEl = document.getElementById('tab-cookie-count');
 
-    // Éléments pour la Carte Sécurité
+    const tabDomainsListEl = document.getElementById('tab-domains-list');
+    const toggleTrackersBtn = document.getElementById('toggle-trackers-btn');
+    const tabDomainsListWrapper = document.getElementById('tab-domains-list-wrapper');
+
     const securityCardEl = document.getElementById('security-card');
     const securityIconEl = document.getElementById('security-icon');
     const securityTitleEl = document.getElementById('security-title');
     const securityCategoryEl = document.getElementById('security-category');
     const securityRiskLabelEl = document.getElementById('security-risk-label');
     const securityRiskTextEl = document.getElementById('security-risk-text');
+    const securityNameEl = document.getElementById('security-name');
 
-    // Helper pour extraire le domaine de base
+    // Accordion Logic
+    if (toggleTrackersBtn && tabDomainsListWrapper) {
+        toggleTrackersBtn.addEventListener('click', () => {
+            tabDomainsListWrapper.classList.toggle('hidden');
+            toggleTrackersBtn.classList.toggle('active');
+            if (tabDomainsListWrapper.classList.contains('hidden')) {
+                toggleTrackersBtn.innerHTML = 'Détails des traceurs <span class="chevron">▼</span>';
+            } else {
+                toggleTrackersBtn.innerHTML = 'Masquer les détails <span class="chevron">▼</span>';
+            }
+        });
+    }
+
+    // Helper to get hostname
     function getHostname(urlStr) {
         try {
             const url = new URL(urlStr);
@@ -42,164 +63,146 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 1. Audit Cookies et Tracker pour l'onglet actif
+    // 1. Audit active tab
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         const activeTab = tabs[0];
-        const httpsCheckIconEl = document.getElementById('https-check-icon');
-        const httpsCheckTextEl = document.getElementById('https-check-text');
 
         if (!activeTab || !activeTab.url.startsWith('http')) {
-            tabDomainEl.textContent = 'Non applicable';
-            tabTrackerCountEl.textContent = '0';
-            if (tabCookieCountEl) tabCookieCountEl.textContent = '0';
-            if (privacyScoreLetterEl) privacyScoreLetterEl.textContent = '?';
-            if (privacyScoreTextEl) privacyScoreTextEl.textContent = 'Non applicable';
-            
-            if (httpsCheckIconEl) httpsCheckIconEl.textContent = '➖';
-            if (httpsCheckTextEl) {
-                httpsCheckTextEl.textContent = 'Non applicable';
-                httpsCheckTextEl.className = 'text-sm text-gray';
+            tabDomainEl.textContent = 'Page locale';
+            if (httpsCheckStrongEl) httpsCheckStrongEl.textContent = 'Non applicable';
+            if (httpsCheckTextEl) httpsCheckTextEl.textContent = 'Aucune connexion réseau.';
+            if (httpsIndicatorEl) {
+                httpsIndicatorEl.classList.remove('status-green', 'status-red');
+                httpsIndicatorEl.classList.add('status-gray');
             }
+            if (privacyScoreLetterEl) {
+                privacyScoreLetterEl.textContent = '-';
+                privacyScoreLetterEl.className = 'grade-badge grade-U';
+            }
+            if (privacyScoreTextEl) privacyScoreTextEl.textContent = 'Analyse désactivée';
             return;
         }
 
         const url = new URL(activeTab.url);
-        
-        // --- Vérification HTTPS ---
+        tabDomainEl.textContent = url.hostname;
+
+        // --- HTTPS Check ---
         if (url.protocol === 'https:') {
             if (httpsCheckIconEl) httpsCheckIconEl.textContent = '🔒';
-            if (httpsCheckTextEl) {
-                httpsCheckTextEl.textContent = 'Connexion chiffrée par certificat SSL.';
-                httpsCheckTextEl.className = 'text-sm text-green';
+            if (httpsCheckStrongEl) httpsCheckStrongEl.textContent = 'Connexion sécurisée';
+            if (httpsCheckTextEl) httpsCheckTextEl.textContent = 'Le trafic vers ce site est chiffré (Certificat SSL valide).';
+            if (httpsIndicatorEl) {
+                httpsIndicatorEl.classList.add('status-green');
+                httpsIndicatorEl.classList.remove('status-red', 'status-gray');
             }
         } else {
             if (httpsCheckIconEl) httpsCheckIconEl.textContent = '🔓';
-            if (httpsCheckTextEl) {
-                httpsCheckTextEl.textContent = 'Connexion HTTP non sécurisée. Prudence !';
-                httpsCheckTextEl.className = 'text-sm text-red';
+            if (httpsCheckStrongEl) httpsCheckStrongEl.textContent = 'Connexion HTTP !';
+            if (httpsCheckTextEl) httpsCheckTextEl.textContent = 'Le trafic n\'est pas chiffré. Évitez de saisir des mots de passe.';
+            if (httpsIndicatorEl) {
+                httpsIndicatorEl.classList.add('status-red');
+                httpsIndicatorEl.classList.remove('status-green', 'status-gray');
             }
         }
-        tabDomainEl.textContent = getHostname(activeTab.url);
 
-        const mainDomainParts = url.hostname.split('.');
-        const mainDomain = mainDomainParts.length > 2
-            ? mainDomainParts.slice(-2).join('.')
-            : url.hostname;
-
-        // --- Vérification Sécurité (IA / Banque / Crypto) ---
+        // --- Security Check (IA / Banque / Crypto) ---
         chrome.runtime.sendMessage({ action: 'getCategory', hostname: url.hostname }, (response) => {
-            if (chrome.runtime.lastError) {
-                console.warn("Erreur background:", chrome.runtime.lastError.message);
-                return;
-            }
+            if (chrome.runtime.lastError) return;
+            
             if (response && response.category) {
                 const rule = response.category;
                 const mainCategory = rule.mainCategory;
                 
-                securityCardEl.className = 'card security-card'; // Reset
+                // Reset card classes
+                securityCardEl.className = 'card widget-card context-widget'; 
                 
                 if (mainCategory === 'IA') {
-                    securityCardEl.classList.add('card-theme-ia');
+                    securityCardEl.classList.add('theme-ia');
                     securityIconEl.textContent = '💡';
-                    securityTitleEl.innerHTML = 'Conseil IA : <span id="security-name"></span>';
+                    securityTitleEl.textContent = 'IA & Vie Privée';
                     securityRiskLabelEl.textContent = 'Point de vigilance :';
                 } else if (mainCategory === 'BANQUE') {
-                    securityCardEl.classList.add('card-theme-banque');
+                    securityCardEl.classList.add('theme-bank');
                     securityIconEl.textContent = '🏦';
-                    securityTitleEl.innerHTML = 'Protection Bancaire : <span id="security-name"></span>';
+                    securityTitleEl.textContent = 'Espace Bancaire';
                     securityRiskLabelEl.textContent = 'Bouclier Actif :';
                 } else if (mainCategory === 'CRYPTO') {
-                    securityCardEl.classList.add('card-theme-crypto');
+                    securityCardEl.classList.add('theme-crypto');
                     securityIconEl.textContent = '🛡️';
-                    securityTitleEl.innerHTML = 'Sécurité Crypto : <span id="security-name"></span>';
+                    securityTitleEl.textContent = 'Service Crypto';
                     securityRiskLabelEl.textContent = 'Alerte Phishing :';
                 }
 
-                // Injecter les données dynamiques
-                document.getElementById('security-name').textContent = rule.name || "Service Inconnu";
                 securityCategoryEl.textContent = rule.category || mainCategory;
+                securityNameEl.textContent = rule.name || url.hostname;
                 securityRiskTextEl.textContent = rule.risk || "Soyez prudents avec vos données.";
                 
                 securityCardEl.classList.remove('hidden');
             }
         });
-        // --------------------------------
 
-        // B. Lecture des statistiques globales et trackers depuis le stockage session
+        // --- Tracker and Cookie Stats ---
         chrome.storage.session.get(['stats_session'], (result) => {
-            const stats = result.stats_session || { total_intercepted: 0, tabs: {} };
-
-            // Stats Spécifiques à l'onglet
+            const stats = result.stats_session || { tabs: {} };
             const tabStats = stats.tabs[activeTab.id] || { count: 0, domains: {}, cookies: 0 };
             const tabTrackerDomains = Object.keys(tabStats.domains || {});
+            
             const tabTrackersCount = tabStats.count || 0;
             const tabCookiesCount = tabStats.cookies || 0;
 
-            tabTrackerCountEl.textContent = tabTrackersCount;
-            tabCookieCountEl.textContent = tabCookiesCount;
+            if (tabTrackerCountEl) tabTrackerCountEl.textContent = tabTrackersCount;
+            if (tabCookieCountEl) tabCookieCountEl.textContent = tabCookiesCount;
 
-            // Calcul du Score
+            // Score Logic
             let scoreLetter = 'A';
-            let scoreText = 'Ce site respecte votre vie privée.';
+            let scoreText = 'Excellent respect de la vie privée';
             
             if (tabTrackersCount > 15 || tabCookiesCount > 10) {
                 scoreLetter = 'D';
-                scoreText = 'Ce site place beaucoup de cookies publicitaires et de suivi.';
+                scoreText = 'Suivi agressif (nombreux traceurs)';
             } else if (tabTrackersCount >= 6 || tabCookiesCount >= 3) {
                 scoreLetter = 'C';
-                scoreText = 'Ce site suit activement votre navigation.';
+                scoreText = 'Suivi actif de votre navigation';
             } else if (tabTrackersCount >= 1 || tabCookiesCount >= 1) {
                 scoreLetter = 'B';
-                scoreText = 'Ce site effectue un suivi léger.';
+                scoreText = 'Suivi modéré détecté';
             }
 
-            privacyScoreLetterEl.textContent = scoreLetter;
-            privacyScoreTextEl.textContent = scoreText;
-            
-            // Appliquer la classe de couleur
-            privacyScoreContainerEl.className = `score-container score-${scoreLetter}`;
-
-            tabDomainsListEl.innerHTML = '';
-
-            if (tabTrackerDomains.length === 0) {
-                tabDomainsListEl.innerHTML = '<li class="empty-state">Aucun tracker détecté sur cette page</li>';
-                return;
+            if (privacyScoreLetterEl) {
+                privacyScoreLetterEl.textContent = scoreLetter;
+                privacyScoreLetterEl.className = `grade-badge grade-${scoreLetter}`;
             }
+            if (privacyScoreTextEl) privacyScoreTextEl.textContent = scoreText;
 
-            // Trier les domaines du plus intercepté au moins intercepté
-            const domains = Object.entries(tabStats.domains);
-            domains.sort((a, b) => b[1] - a[1]);
+            // Fill Tracker List
+            if (tabDomainsListEl) {
+                tabDomainsListEl.innerHTML = '';
 
-            // Prendre le top 10 et additionner le reste
-            const top10 = domains.slice(0, 10);
-            const othersCount = domains.slice(10).reduce((acc, curr) => acc + curr[1], 0);
+                if (tabTrackerDomains.length === 0) {
+                    tabDomainsListEl.innerHTML = '<li class="empty-state">Aucun traceur tiers détecté</li>';
+                    return;
+                }
 
-            // Fonction helper pour ajouter une ligne de liste
-            const createListItem = (name, count, isOther = false) => {
-                const li = document.createElement('li');
-                li.className = isOther ? 'domain-item other' : 'domain-item';
+                const domains = Object.entries(tabStats.domains);
+                domains.sort((a, b) => b[1] - a[1]); // Descending count
 
-                const nameSpan = document.createElement('span');
-                nameSpan.className = 'domain-name';
-                nameSpan.textContent = name;
+                const top10 = domains.slice(0, 10);
+                const othersCount = domains.slice(10).reduce((acc, curr) => acc + curr[1], 0);
 
-                const countSpan = document.createElement('span');
-                countSpan.className = 'domain-count';
-                countSpan.textContent = count;
+                const createListItem = (name, count, isOther = false) => {
+                    const li = document.createElement('li');
+                    li.className = isOther ? 'domain-item other' : 'domain-item';
+                    li.innerHTML = `<span class="domain-name">${name}</span><span class="domain-count">${count}</span>`;
+                    return li;
+                };
 
-                li.appendChild(nameSpan);
-                li.appendChild(countSpan);
-                return li;
-            };
+                top10.forEach(([domain, count]) => {
+                    tabDomainsListEl.appendChild(createListItem(domain, count));
+                });
 
-            // Ajouter le top 10 au DOM
-            top10.forEach(([domain, count]) => {
-                tabDomainsListEl.appendChild(createListItem(domain, count));
-            });
-
-            // S'il y a d'autres domaines, ajouter la ligne "Autres"
-            if (othersCount > 0) {
-                tabDomainsListEl.appendChild(createListItem('Autres', othersCount, true));
+                if (othersCount > 0) {
+                    tabDomainsListEl.appendChild(createListItem('Autres', othersCount, true));
+                }
             }
         });
     });
